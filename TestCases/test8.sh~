@@ -1,0 +1,16 @@
+openssl genrsa -out private.pem 1024
+openssl rsa -inform PEM -in private.pem -out public.pem -pubout
+sleep 2
+
+./mySSL -s -key private.pem -in plainText -out mySignText
+sleep 3
+openssl dgst -sha1 -verify public.pem -signature mySignText plainText
+sleep 3
+rm -rf mySignText
+
+openssl dgst -sha1 -sign private.pem -out mySignText plainText
+sleep 2
+./mySSL -v -key public.pem -signature mySignText plainText
+rm -rf *.pem *.der mySignText
+
+

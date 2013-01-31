@@ -1,0 +1,12 @@
+./mySSL -s -key server_private.key -in plainText -out mySignText
+sleep 3
+./mySSL -v -crt server.crt -signature mySignText plainText
+sleep 3
+rm -rf mySignText
+
+openssl dgst -sha1 -sign server_private.key -out mySignText plainText
+sleep 2
+./mySSL -v -crt server.crt -signature mySignText plainText
+rm -rf *.pem *.der mySignText
+
+

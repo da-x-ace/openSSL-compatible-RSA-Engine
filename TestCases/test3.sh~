@@ -1,0 +1,12 @@
+openssl genrsa -out private.pem 1024
+openssl rsa -inform PEM -in private.pem -out public.pem -pubout
+
+
+./mySSL -e -key public.pem -in plainText -out myCipherText
+
+openssl rsautl -decrypt -inkey private.pem -in myCipherText -out myDecipheredText
+
+diff plainText myDecipheredText
+
+
+

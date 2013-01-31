@@ -1,0 +1,5 @@
+./mySSL -e -crt server.crt -in plainText -out myCipherText
+sleep 3
+openssl rsautl -decrypt -inkey server_private.key -in myCipherText -out myDecipheredText
+sleep 3
+diff plainText myDecipheredText

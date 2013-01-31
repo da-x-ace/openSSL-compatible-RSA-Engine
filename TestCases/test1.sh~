@@ -1,0 +1,9 @@
+./mySSL genrsa private.pem public.pem
+sleep 5
+./mySSL -e -key public.pem -in plainText -out myCipherText
+sleep 3
+./mySSL -d -key private.pem -in myCipherText -out myDecipheredText
+sleep 3
+diff plainText myDecipheredText
+sleep 3
+rm -rf *.pem *.der myCipherText myDecipheredText
